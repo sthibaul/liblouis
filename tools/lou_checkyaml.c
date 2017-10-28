@@ -127,12 +127,14 @@ read_table_query (yaml_parser_t *parser) {
       if (query_as_string != p) strcat(p++, " ");
       strcat(p, (const char *)event.data.scalar.value);
       p += event.data.scalar.length;
-      strcat(p++, ":");
       yaml_event_delete(&event);
       if (!yaml_parser_parse(parser, &event) ||
 	  (event.type != YAML_SCALAR_EVENT))
 	yaml_error(YAML_SCALAR_EVENT, &event);
-      strcat(p, (const char *)event.data.scalar.value);
+      if (strcmp((const char *)event.data.scalar.value, "true")) {
+        strcat(p++, ":");
+        strcat(p, (const char *)event.data.scalar.value);
+      }
       p += event.data.scalar.length;
       yaml_event_delete(&event);
     } else if (event.type == YAML_MAPPING_END_EVENT) {
