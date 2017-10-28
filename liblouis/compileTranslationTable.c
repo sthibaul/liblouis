@@ -5465,7 +5465,7 @@ lou_getTable (const char *tableList)
       lastTrans = newEntry;
       return newEntry->table;
     }
-  _lou_logMessage (LOG_ERROR, "%s could not be found", tableList);
+  _lou_logMessage (LOG_ERROR, "%s could not be compiled", tableList);
   return NULL;
 }
 
