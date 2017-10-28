@@ -1,4 +1,7 @@
-table: [tables/unicode.dis, tables/el.ctb]
+# table: [unicode.dis, el.ctb]
+display: unicode.dis
+table:
+  locale: el
 flags: {testmode: forward}
 tests:
 

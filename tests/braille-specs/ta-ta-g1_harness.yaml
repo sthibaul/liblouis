@@ -1,4 +1,8 @@
-table: [tables/unicode.dis, tables/ta-ta-g1.ctb]
+# table: [unicode.dis, ta-ta-g1.ctb]
+display: unicode.dis
+table:
+  locale: ta
+  grade: 1
 tests:
   - [இ, ⠊]
   - [ப, ⠏, {xfail: true}]

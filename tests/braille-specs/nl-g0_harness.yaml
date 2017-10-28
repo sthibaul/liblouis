@@ -1,5 +1,12 @@
-table: [tables/unicode.dis,tables/nl-NL-g0.utb]
-table: [tables/unicode.dis,tables/nl-BE-g0.utb]
+# table: [unicode.dis,nl-NL-g0.utb]
+# table: [unicode.dis,nl-BE-g0.utb]
+display: unicode.dis
+table:
+  locale: nl-NL
+  grade: 0
+table:
+  locale: nl-BE
+  grade: 0
 tests:
   - - Lowercase letters
     - a b c d e f g h i j k l m n o p q r s t u v w x y z

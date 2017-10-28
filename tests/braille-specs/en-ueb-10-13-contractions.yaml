@@ -1,4 +1,8 @@
-table: [tables/en-ueb-g2.ctb]
+# table: [en-ueb-g2.ctb]
+table:
+  locale: en
+  grade: 2
+  ueb: true
 tests:
 
 # 10.8.1 page 133

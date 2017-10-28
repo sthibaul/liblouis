@@ -1,4 +1,9 @@
-table: [tables/unicode.dis, tables/hu-hu-g1.ctb, tables/hyph_hu_HU.dic]
+# table: [unicode.dis, hu-hu-g1.ctb, hyph_hu_HU.dic]
+display: unicode.dis
+table:
+  locale: hu
+  grade: 1
+  hyphenation: yes
 flags: {testmode: hyphenate}
 tests:
   - [adásszalagokat, adássza-la-go-kat]

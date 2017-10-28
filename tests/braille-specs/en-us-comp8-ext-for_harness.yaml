@@ -1,4 +1,9 @@
-table: [tables/unicode.dis, tables/en-us-comp8-ext.utb]
+# table: [unicode.dis, en-us-comp8-ext.utb]
+display: unicode.dis
+table:
+  locale: en-US
+  type: computer
+  dots: 8
 flags: {testmode: forward}
 tests:
   - - Uppercase and lowercase

@@ -1,4 +1,10 @@
-table: [tables/unicode.dis, tables/no-no-8dot-fallback-6dot-g0.utb]
+# table: [unicode.dis, no-no-8dot-fallback-6dot-g0.utb]
+display: unicode.dis
+table:
+  locale: no
+  type: literary
+  grade: 0
+  dots: 8
 tests:
   - ["\u0001", ⣁] # START OF HEADING
   - ["\u0002", ⣃] # START OF TEXT

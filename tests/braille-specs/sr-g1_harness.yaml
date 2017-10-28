@@ -1,4 +1,8 @@
-table: [tables/unicode.dis, tables/sr-g1.ctb]
+# table: [unicode.dis, sr-g1.ctb]
+display: unicode.dis
+table:
+  locale: sr
+  grade: 1
 tests:
   - [WILDCARD, ⠘⠺⠊⠇⠙⠉⠁⠗⠙] # tested buggy behavior
   - [-, ⠤] # same thing again

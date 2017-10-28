@@ -1,4 +1,7 @@
-table: [tables/unicode.dis, tables/zh-chn.ctb]
+# table: [unicode.dis, zh-chn.ctb]
+display: unicode.dis
+table:
+  locale: zh-CHN
 tests:
   - [八,⠃⠔]
   - [白,⠃⠪]

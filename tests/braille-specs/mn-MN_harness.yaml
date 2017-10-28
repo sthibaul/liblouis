@@ -1,4 +1,7 @@
-table: [tables/unicode.dis, tables/mn-MN.utb]
+# table: [unicode.dis, mn-MN.utb]
+display: unicode.dis
+table:
+  locale: mn
 tests:
   - # Hello world
     - Сайн байна уу дэлхий
