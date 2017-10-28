@@ -145,7 +145,7 @@ read_table_query (yaml_parser_t *parser) {
 }
 
 char *
-read_table (yaml_event_t *start_event, yaml_parser_t *parser) {
+read_table (yaml_event_t *start_event, yaml_parser_t *parser, const char *display_table) {
   char *table = NULL;
   if (start_event->type != YAML_SCALAR_EVENT ||
       strcmp((const char *)start_event->data.scalar.value, "table"))
@@ -220,6 +220,14 @@ read_table (yaml_event_t *start_event, yaml_parser_t *parser) {
     free(query);
     if (!table)
       exit (EXIT_FAILURE);
+  }
+  if (display_table) {
+    char *t = table;
+    table = malloc(strlen(display_table) + 1 + strlen(t) + 1);
+    strcpy(table, display_table);
+    strcat(table, ",");
+    strcat(table, t);
+    free(t);
   }
   emph_classes = lou_getEmphClasses(table); // get declared emphasis classes
   return table;
@@ -730,12 +738,27 @@ main(int argc, char *argv[]) {
   }
   yaml_event_delete(&event);
 
-  if (!yaml_parser_parse(&parser, &event))
+  int has_next;
+  has_next = yaml_parser_parse(&parser, &event);
+
+  const char *display_table = NULL;
+  if (has_next &&
+      event.type == YAML_SCALAR_EVENT &&
+      !strcmp((const char *)event.data.scalar.value, "display")) {
+    yaml_event_delete(&event);
+    if (!yaml_parser_parse(&parser, &event) || event.type != YAML_SCALAR_EVENT)
+      yaml_error(YAML_SCALAR_EVENT, &event);
+    display_table = strndup((const char *)event.data.scalar.value, event.data.scalar.length);
+    yaml_event_delete(&event);
+    has_next = yaml_parser_parse(&parser, &event);
+  }
+
+  if (!has_next)
     simple_error("table expected", &parser, &event);
 
   int MAXTABLES = 10;
   char *tables[MAXTABLES + 1];
-  while ((tables[0] = read_table(&event, &parser))) {
+  while ((tables[0] = read_table(&event, &parser, display_table))) {
     yaml_event_delete(&event);
     int k = 1;
     while (1) {
@@ -744,7 +767,7 @@ main(int argc, char *argv[]) {
 		      "Expected table or %s (actual %s)",
 		      event_names[YAML_SCALAR_EVENT],
 		      event_names[event.type]);
-      if ((tables[k++] = read_table(&event, &parser))) {
+      if ((tables[k++] = read_table(&event, &parser, display_table))) {
 	if (k == MAXTABLES)
 	  exit (EXIT_FAILURE);
 	yaml_event_delete(&event);
